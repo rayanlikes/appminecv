@@ -10,7 +10,6 @@ jobs:
     runs-on: windows-latest
     env:
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
-      ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: 'true'
 
     steps:
     - uses: actions/checkout@v4
@@ -27,7 +26,7 @@ jobs:
       run: dotnet restore CVGenerator.csproj
 
     - name: Build Android APK
-      run: dotnet publish CVGenerator.csproj -f net8.0-android -c Release /p:AndroidPackageFormat=apk
+      run: dotnet publish CVGenerator.csproj -f net8.0-android -c Debug /p:AndroidPackageFormat=apk
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
