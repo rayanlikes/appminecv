@@ -1,0 +1,10 @@
+obj/
+bin/
+*.user
+*.suo
+.vs/
+out.txt
+out2.txt
+error.txt
+build_output.txt
+output.txt
