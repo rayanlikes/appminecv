@@ -14,10 +14,7 @@
     <SupportedOSPlatformVersion>21.0</SupportedOSPlatformVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <MauiImage Include="Resources\Images\*" />
-    <MauiFont Include="Resources\Fonts\*" />
-  </ItemGroup>
+
 
   <ItemGroup>
     <MauiAsset Include="Assets\cv_model.onnx" Condition="Exists('Assets\cv_model.onnx')" />
