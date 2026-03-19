@@ -1,0 +1,21 @@
+{
+  "version": 2,
+  "dgSpecHash": "1/FihfHuqpE=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Administrateur\\Desktop\\Nouveau dossier (2)\\CVGenerator\\CVGenerator.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrateur\\.nuget\\packages\\communitytoolkit.mvvm\\8.3.2\\communitytoolkit.mvvm.8.3.2.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\microsoft.ml.onnxruntime\\1.17.3\\microsoft.ml.onnxruntime.1.17.3.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\microsoft.ml.onnxruntime.managed\\1.17.3\\microsoft.ml.onnxruntime.managed.1.17.3.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\questpdf\\2024.3.4\\questpdf.2024.3.4.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\system.memory\\4.5.5\\system.memory.4.5.5.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\microsoft.netcore.app.ref\\8.0.25\\microsoft.netcore.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\8.0.25\\microsoft.windowsdesktop.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\8.0.25\\microsoft.aspnetcore.app.ref.8.0.25.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\8.0.25\\microsoft.netcore.app.host.win-x64.8.0.25.nupkg.sha512",
+    "C:\\Users\\Administrateur\\.nuget\\packages\\microsoft.windows.sdk.net.ref\\10.0.19041.57\\microsoft.windows.sdk.net.ref.10.0.19041.57.nupkg.sha512"
+  ],
+  "logs": []
+}

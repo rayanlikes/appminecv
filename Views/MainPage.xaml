@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:CVGenerator.ViewModels"
+    x:Class="CVGenerator.Views.MainPage"
+    x:DataType="vm:MainViewModel"
+    Title="CV Generator"
+    BackgroundColor="{StaticResource BackgroundDark}">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <VerticalStackLayout Padding="20,24,20,40" Spacing="0">
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  EN-TÊTE                                       -->
+                <!-- ══════════════════════════════════════════════ -->
+                <VerticalStackLayout Spacing="4" Margin="0,0,0,28">
+
+                    <!-- Badge "IA Locale" -->
+                    <HorizontalStackLayout HorizontalOptions="Center">
+                        <Frame CornerRadius="20" Padding="10,4"
+                               BackgroundColor="#7C3AED22"
+                               BorderColor="#7C3AED44">
+                            <Label Text="🤖 Intelligence Artificielle Locale"
+                                   FontSize="11" FontAttributes="Bold"
+                                   TextColor="{StaticResource AccentVioletLight}" />
+                        </Frame>
+                    </HorizontalStackLayout>
+
+                    <Label Text="Créez votre CV"
+                           Style="{StaticResource HeadlineStyle}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           Margin="0,12,0,0" />
+
+                    <Label Text="Collez votre texte brut ci-dessous.&#x0a;Notre IA locale analysera et structurera votre CV automatiquement."
+                           Style="{StaticResource SubtitleStyle}"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center"
+                           LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  ZONE DE SAISIE                                -->
+                <!-- ══════════════════════════════════════════════ -->
+                <Frame CornerRadius="16"
+                       Padding="0"
+                       BackgroundColor="{StaticResource CardDark}"
+                       BorderColor="{StaticResource BorderColor}"
+                       HasShadow="False"
+                       Margin="0,0,0,20">
+
+                    <VerticalStackLayout>
+                        <!-- Label de section -->
+                        <HorizontalStackLayout Padding="16,12,16,0" Spacing="8">
+                            <Label Text="📋" FontSize="14" VerticalOptions="Center" />
+                            <Label Text="Vos informations"
+                                   FontSize="13" FontAttributes="Bold"
+                                   TextColor="{StaticResource TextPrimary}"
+                                   VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                        <!-- Séparateur -->
+                        <BoxView HeightRequest="1"
+                                 Color="{StaticResource BorderColor}"
+                                 Margin="16,8,16,0" />
+
+                        <!-- Zone de texte principale -->
+                        <Editor x:Name="RawTextEditor"
+                                Style="{StaticResource InputEditorStyle}"
+                                Text="{Binding RawText, Mode=TwoWay}"
+                                Placeholder="Collez ici votre texte brut :&#x0a;&#x0a;Prénom Nom&#x0a;Développeur .NET Senior&#x0a;email@exemple.com | +33 6 00 00 00 00&#x0a;&#x0a;EXPÉRIENCES&#x0a;2022 – Présent | Tech Corp&#x0a;Développeur principal...&#x0a;&#x0a;FORMATIONS&#x0a;Master Informatique – 2021 – EPFL&#x0a;&#x0a;COMPÉTENCES&#x0a;C#, Python, Docker, Azure..."
+                                AutoSize="TextChanges"
+                                MinimumHeightRequest="300"
+                                Margin="4,4,4,4"
+                                IsEnabled="{Binding IsLoading, Converter={x:StaticResource InverseBoolConverter}}" />
+
+                        <!-- Compteur de caractères -->
+                        <Label Margin="16,0,16,12"
+                               HorizontalOptions="End"
+                               FontSize="11"
+                               TextColor="{StaticResource TextMuted}">
+                            <Label.Text>
+                                <MultiBinding StringFormat="{}{0} caractères">
+                                    <Binding Path="RawText.Length" />
+                                </MultiBinding>
+                            </Label.Text>
+                        </Label>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  BOUTON PRINCIPAL                              -->
+                <!-- ══════════════════════════════════════════════ -->
+                <Button Text="✨  Créer mon CV"
+                        Command="{Binding CreateCvCommand}"
+                        Style="{StaticResource PrimaryButtonStyle}"
+                        Margin="0,0,0,16">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding IsLoading}"
+                                     Value="True">
+                            <Setter Property="Text" Value="Analyse en cours…" />
+                            <Setter Property="BackgroundColor" Value="#5B21B6" />
+                            <Setter Property="IsEnabled" Value="False" />
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  INDICATEUR DE CHARGEMENT                      -->
+                <!-- ══════════════════════════════════════════════ -->
+                <VerticalStackLayout
+                    IsVisible="{Binding IsLoading}"
+                    Spacing="12"
+                    Margin="0,0,0,16">
+
+                    <ActivityIndicator
+                        IsRunning="{Binding IsLoading}"
+                        Color="{StaticResource AccentViolet}"
+                        HorizontalOptions="Center"
+                        HeightRequest="40"
+                        WidthRequest="40" />
+
+                    <Label Text="{Binding StatusMessage}"
+                           TextColor="{StaticResource AccentVioletLight}"
+                           FontSize="13"
+                           HorizontalOptions="Center"
+                           HorizontalTextAlignment="Center" />
+                </VerticalStackLayout>
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  MESSAGE DE STATUT (Succès / Erreur)           -->
+                <!-- ══════════════════════════════════════════════ -->
+                <Frame x:Name="StatusFrame"
+                       IsVisible="{Binding HasStatus}"
+                       CornerRadius="14"
+                       Padding="16,14"
+                       BorderColor="Transparent"
+                       Margin="0,0,0,16"
+                       HasShadow="False">
+
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame"
+                                     Binding="{Binding IsSuccess}" Value="True">
+                            <Setter Property="BackgroundColor" Value="#10B98122" />
+                            <Setter Property="BorderColor"     Value="#10B981" />
+                        </DataTrigger>
+                        <DataTrigger TargetType="Frame"
+                                     Binding="{Binding IsSuccess}" Value="False">
+                            <Setter Property="BackgroundColor" Value="#EF444422" />
+                            <Setter Property="BorderColor"     Value="#EF4444" />
+                        </DataTrigger>
+                    </Frame.Triggers>
+
+                    <!-- Masquer pendant le chargement (le statut s'affiche en live au-dessus) -->
+                    <Frame.IsVisible>
+                        <MultiBinding>
+                            <MultiBinding.Converter>
+                                <x:StaticResource Key="AndBoolConverter" />
+                            </MultiBinding.Converter>
+                            <Binding Path="HasStatus" />
+                            <Binding Path="IsLoading"
+                                     Converter="{StaticResource InverseBoolConverter}" />
+                        </MultiBinding>
+                    </Frame.IsVisible>
+
+                    <Label Text="{Binding StatusMessage}"
+                           FontSize="13"
+                           LineBreakMode="WordWrap"
+                           HorizontalTextAlignment="Center">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding IsSuccess}" Value="True">
+                                <Setter Property="TextColor" Value="#10B981" />
+                            </DataTrigger>
+                            <DataTrigger TargetType="Label"
+                                         Binding="{Binding IsSuccess}" Value="False">
+                                <Setter Property="TextColor" Value="#EF4444" />
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                </Frame>
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  BOUTON PARTAGER PDF                           -->
+                <!-- ══════════════════════════════════════════════ -->
+                <Button Text="📤  Partager le PDF"
+                        Command="{Binding SharePdfCommand}"
+                        IsVisible="{Binding CanShare}"
+                        BackgroundColor="Transparent"
+                        BorderColor="{StaticResource AccentViolet}"
+                        BorderWidth="1.5"
+                        TextColor="{StaticResource AccentViolet}"
+                        CornerRadius="14"
+                        FontSize="15"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        Margin="0,0,0,20" />
+
+                <!-- ══════════════════════════════════════════════ -->
+                <!--  SECTION INFO / CONSEILS                       -->
+                <!-- ══════════════════════════════════════════════ -->
+                <Frame CornerRadius="14"
+                       BackgroundColor="{StaticResource CardDark}"
+                       BorderColor="{StaticResource BorderColor}"
+                       Padding="16,14"
+                       HasShadow="False">
+                    <VerticalStackLayout Spacing="8">
+                        <Label Text="💡 Conseils pour un meilleur résultat"
+                               FontSize="12" FontAttributes="Bold"
+                               TextColor="{StaticResource AccentGold}" />
+
+                        <Label FontSize="11" TextColor="{StaticResource TextSecondary}"
+                               LineBreakMode="WordWrap"
+                               Text="• Commencez par votre Nom complet sur la première ligne" />
+                        <Label FontSize="11" TextColor="{StaticResource TextSecondary}"
+                               LineBreakMode="WordWrap"
+                               Text="• Incluez les mots-clés : EXPÉRIENCES, FORMATIONS, COMPÉTENCES" />
+                        <Label FontSize="11" TextColor="{StaticResource TextSecondary}"
+                               LineBreakMode="WordWrap"
+                               Text="• Format dates : 2020 – 2023 ou Janv 2020 – Déc 2023" />
+                        <Label FontSize="11" TextColor="{StaticResource TextSecondary}"
+                               LineBreakMode="WordWrap"
+                               Text="• 100% hors-ligne — vos données ne quittent jamais votre appareil 🔒" />
+                    </VerticalStackLayout>
+                </Frame>
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

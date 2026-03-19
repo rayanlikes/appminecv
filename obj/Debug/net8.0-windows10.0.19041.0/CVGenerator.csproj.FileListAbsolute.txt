@@ -1,0 +1,5 @@
+C:\Users\Administrateur\Desktop\Nouveau dossier (2)\CVGenerator\obj\Debug\net8.0-windows10.0.19041.0\CVGenerator.csproj.AssemblyReference.cache
+C:\Users\Administrateur\Desktop\Nouveau dossier (2)\CVGenerator\obj\Debug\net8.0-windows10.0.19041.0\CVGenerator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Administrateur\Desktop\Nouveau dossier (2)\CVGenerator\obj\Debug\net8.0-windows10.0.19041.0\CVGenerator.AssemblyInfoInputs.cache
+C:\Users\Administrateur\Desktop\Nouveau dossier (2)\CVGenerator\obj\Debug\net8.0-windows10.0.19041.0\CVGenerator.AssemblyInfo.cs
+C:\Users\Administrateur\Desktop\Nouveau dossier (2)\CVGenerator\obj\Debug\net8.0-windows10.0.19041.0\CVGenerator.csproj.CoreCompileInputs.cache

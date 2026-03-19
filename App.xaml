@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:conv="clr-namespace:CVGenerator.Converters"
+             x:Class="CVGenerator.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- ── Convertisseurs de valeur ───────────────────────────── -->
+            <conv:InverseBoolConverter x:Key="InverseBoolConverter" />
+            <conv:AndBoolConverter     x:Key="AndBoolConverter" />
+
+            <!-- ── Palette de couleurs ──────────────────────────────── -->
+            <Color x:Key="BackgroundDark">#0F0F1A</Color>
+            <Color x:Key="SurfaceDark">#1A1A2E</Color>
+            <Color x:Key="CardDark">#16213E</Color>
+            <Color x:Key="AccentViolet">#7C3AED</Color>
+            <Color x:Key="AccentVioletLight">#A855F7</Color>
+            <Color x:Key="AccentGold">#F59E0B</Color>
+            <Color x:Key="TextPrimary">#F8FAFC</Color>
+            <Color x:Key="TextSecondary">#94A3B8</Color>
+            <Color x:Key="TextMuted">#475569</Color>
+            <Color x:Key="Success">#10B981</Color>
+            <Color x:Key="Error">#EF4444</Color>
+            <Color x:Key="BorderColor">#2D2D44</Color>
+
+            <!-- ── Styles globaux ───────────────────────────────────── -->
+            <Style TargetType="Page" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="{StaticResource BackgroundDark}" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="HeadlineStyle">
+                <Setter Property="FontSize" Value="26" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+            </Style>
+
+            <Style TargetType="Label" x:Key="SubtitleStyle">
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="TextColor" Value="{StaticResource TextSecondary}" />
+            </Style>
+
+            <Style TargetType="Editor" x:Key="InputEditorStyle">
+                <Setter Property="BackgroundColor" Value="{StaticResource CardDark}" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+                <Setter Property="PlaceholderColor" Value="{StaticResource TextMuted}" />
+                <Setter Property="FontSize" Value="14" />
+            </Style>
+
+            <Style TargetType="Button" x:Key="PrimaryButtonStyle">
+                <Setter Property="BackgroundColor" Value="{StaticResource AccentViolet}" />
+                <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+                <Setter Property="CornerRadius" Value="14" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="HeightRequest" Value="56" />
+                <Setter Property="Shadow">
+                    <Setter.Value>
+                        <Shadow Brush="{StaticResource AccentViolet}" Offset="0,4" Radius="12" Opacity="0.5" />
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,33 @@
+name: Build Android MAUI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup .NET 8
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Install MAUI Workload
+      run: dotnet workload install maui-android
+
+    - name: Restore Dependencies
+      run: dotnet restore CVGenerator.csproj
+
+    - name: Build Android APK
+      run: dotnet publish CVGenerator.csproj -f net8.0-android -c Release /p:AndroidPackageFormat=apk
+
+    - name: Upload APK
+      uses: actions/upload-artifact@v3
+      with:
+        name: CVGenerator-Android-App
+        path: '**/*Signed.apk'
