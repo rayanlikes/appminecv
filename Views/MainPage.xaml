@@ -19,13 +19,13 @@
 
                     <!-- Badge "IA Locale" -->
                     <HorizontalStackLayout HorizontalOptions="Center">
-                        <Frame CornerRadius="20" Padding="10,4"
+                        <Border StrokeShape="RoundRectangle 20" Padding="10,4"
                                BackgroundColor="#7C3AED22"
-                               BorderColor="#7C3AED44">
+                               Stroke="#7C3AED44">
                             <Label Text="🤖 Intelligence Artificielle Locale"
                                    FontSize="11" FontAttributes="Bold"
                                    TextColor="{StaticResource AccentVioletLight}" />
-                        </Frame>
+                        </Border>
                     </HorizontalStackLayout>
 
                     <Label Text="Créez votre CV"
@@ -44,11 +44,10 @@
                 <!-- ══════════════════════════════════════════════ -->
                 <!--  ZONE DE SAISIE                                -->
                 <!-- ══════════════════════════════════════════════ -->
-                <Frame CornerRadius="16"
+                <Border StrokeShape="RoundRectangle 16"
                        Padding="0"
                        BackgroundColor="{StaticResource CardDark}"
-                       BorderColor="{StaticResource BorderColor}"
-                       HasShadow="False"
+                       Stroke="{StaticResource BorderColor}"
                        Margin="0,0,0,20">
 
                     <VerticalStackLayout>
@@ -88,7 +87,7 @@
                             </Label.Text>
                         </Label>
                     </VerticalStackLayout>
-                </Frame>
+                </Border>
 
                 <!-- ══════════════════════════════════════════════ -->
                 <!--  BOUTON PRINCIPAL                              -->
@@ -133,29 +132,28 @@
                 <!-- ══════════════════════════════════════════════ -->
                 <!--  MESSAGE DE STATUT (Succès / Erreur)           -->
                 <!-- ══════════════════════════════════════════════ -->
-                <Frame x:Name="StatusFrame"
+                <Border x:Name="StatusFrame"
                        IsVisible="{Binding HasStatus}"
-                       CornerRadius="14"
+                       StrokeShape="RoundRectangle 14"
                        Padding="16,14"
-                       BorderColor="Transparent"
-                       Margin="0,0,0,16"
-                       HasShadow="False">
+                       Stroke="Transparent"
+                       Margin="0,0,0,16">
 
-                    <Frame.Triggers>
-                        <DataTrigger TargetType="Frame"
+                    <Border.Triggers>
+                        <DataTrigger TargetType="Border"
                                      Binding="{Binding IsSuccess}" Value="True">
                             <Setter Property="BackgroundColor" Value="#10B98122" />
-                            <Setter Property="BorderColor"     Value="#10B981" />
+                            <Setter Property="Stroke"          Value="#10B981" />
                         </DataTrigger>
-                        <DataTrigger TargetType="Frame"
+                        <DataTrigger TargetType="Border"
                                      Binding="{Binding IsSuccess}" Value="False">
                             <Setter Property="BackgroundColor" Value="#EF444422" />
-                            <Setter Property="BorderColor"     Value="#EF4444" />
+                            <Setter Property="Stroke"          Value="#EF4444" />
                         </DataTrigger>
-                    </Frame.Triggers>
+                    </Border.Triggers>
 
                     <!-- Masquer pendant le chargement (le statut s'affiche en live au-dessus) -->
-                    <Frame.IsVisible>
+                    <Border.IsVisible>
                         <MultiBinding>
                             <MultiBinding.Converter>
                                 <x:StaticResource Key="AndBoolConverter" />
@@ -164,7 +162,7 @@
                             <Binding Path="IsLoading"
                                      Converter="{StaticResource InverseBoolConverter}" />
                         </MultiBinding>
-                    </Frame.IsVisible>
+                    </Border.IsVisible>
 
                     <Label Text="{Binding StatusMessage}"
                            FontSize="13"
@@ -181,7 +179,7 @@
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
-                </Frame>
+                </Border>
 
                 <!-- ══════════════════════════════════════════════ -->
                 <!--  BOUTON PARTAGER PDF                           -->
@@ -202,11 +200,10 @@
                 <!-- ══════════════════════════════════════════════ -->
                 <!--  SECTION INFO / CONSEILS                       -->
                 <!-- ══════════════════════════════════════════════ -->
-                <Frame CornerRadius="14"
+                <Border StrokeShape="RoundRectangle 14"
                        BackgroundColor="{StaticResource CardDark}"
-                       BorderColor="{StaticResource BorderColor}"
-                       Padding="16,14"
-                       HasShadow="False">
+                       Stroke="{StaticResource BorderColor}"
+                       Padding="16,14">
                     <VerticalStackLayout Spacing="8">
                         <Label Text="💡 Conseils pour un meilleur résultat"
                                FontSize="12" FontAttributes="Bold"
@@ -225,7 +222,7 @@
                                LineBreakMode="WordWrap"
                                Text="• 100% hors-ligne — vos données ne quittent jamais votre appareil 🔒" />
                     </VerticalStackLayout>
-                </Frame>
+                </Border>
 
             </VerticalStackLayout>
         </ScrollView>

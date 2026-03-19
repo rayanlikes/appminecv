@@ -35,8 +35,9 @@ public sealed class OnnxCvParserService : IOnnxCvParser, IDisposable
             {
                 // Cherche le modèle dans les assets embarqués
                 using var stream = await FileSystem.OpenAppPackageFileAsync("cv_model.onnx");
-                var modelBytes = new byte[stream.Length];
-                await stream.ReadAsync(modelBytes);
+                using var ms = new MemoryStream();
+                await stream.CopyToAsync(ms);
+                var modelBytes = ms.ToArray();
 
                 // SessionOptions optimisées pour mobile
                 var options = new SessionOptions

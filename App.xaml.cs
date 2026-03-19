@@ -4,9 +4,13 @@ namespace CVGenerator;
 
 public partial class App : Application
 {
-    public App(MainPage mainPage)
+    public App()
     {
         InitializeComponent();
-        MainPage = new AppShell();
+    }
+
+    protected override Window CreateWindow(IActivationState? activationState)
+    {
+        return new Window(new AppShell());
     }
 }

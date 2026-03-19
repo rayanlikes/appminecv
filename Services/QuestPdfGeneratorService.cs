@@ -11,15 +11,12 @@ namespace CVGenerator.Services;
 /// </summary>
 public sealed class QuestPdfGeneratorService : IPdfGeneratorService
 {
-    // ── Palette PDF ────────────────────────────────────────────────
     private static readonly string ColorSidebar  = "#7C3AED";    // Violet accent
     private static readonly string ColorHeader   = "#1A1A2E";    // Fond sombre
-    private static readonly string ColorTitle    = "#FFFFFF";
     private static readonly string ColorBody     = "#1E293B";
     private static readonly string ColorMuted    = "#64748B";
     private static readonly string ColorAccent   = "#A855F7";
     private static readonly string ColorBar      = "#E2E8F0";    // Barre niveau (fond)
-    private static readonly string ColorBarFill  = "#7C3AED";    // Barre niveau (remplie)
 
     public async Task<string> GenerateAsync(CvData cv, CancellationToken cancellationToken = default)
     {
@@ -60,7 +57,7 @@ public sealed class QuestPdfGeneratorService : IPdfGeneratorService
                         });
 
                         // ── Colonne droite (Contenu principal) ────
-                        row.RelativeItem().Background(Colors.White).Column(main =>
+                        row.RelativeItem().Background(QuestPDF.Helpers.Colors.White).Column(main =>
                         {
                             // En-tête nom + titre
                             BuildMainHeader(main, cv.Contact);
@@ -96,7 +93,7 @@ public sealed class QuestPdfGeneratorService : IPdfGeneratorService
             .Border(2).BorderColor("#FFFFFF55")
             .AlignMiddle().AlignCenter()
             .Text(initials)
-                .FontSize(28).Bold().FontColor(Colors.White);
+                .FontSize(28).Bold().FontColor(QuestPDF.Helpers.Colors.White);
     }
 
     private static void BuildContactSection(ColumnDescriptor col, ContactInfo contact)
@@ -122,7 +119,7 @@ public sealed class QuestPdfGeneratorService : IPdfGeneratorService
         col.Item().PaddingBottom(6).Row(r =>
         {
             r.ConstantItem(18).Text(icon).FontSize(11).FontColor("#FFFFFFCC");
-            r.RelativeItem().Text(value).FontSize(9).FontColor(Colors.White).Italic();
+            r.RelativeItem().Text(value).FontSize(9).FontColor(QuestPDF.Helpers.Colors.White).Italic();
         });
     }
 
@@ -145,7 +142,7 @@ public sealed class QuestPdfGeneratorService : IPdfGeneratorService
             {
                 col.Item().PaddingBottom(5).Column(sc =>
                 {
-                    sc.Item().Text(skill.Name).FontSize(9).FontColor(Colors.White);
+                    sc.Item().Text(skill.Name).FontSize(9).FontColor(QuestPDF.Helpers.Colors.White);
                     // Barre de niveau (5 segments)
                     sc.Item().Height(4).Row(br =>
                     {
@@ -168,7 +165,7 @@ public sealed class QuestPdfGeneratorService : IPdfGeneratorService
         col.Item().Background(ColorHeader).Padding(24).Column(h =>
         {
             h.Item().Text(string.IsNullOrEmpty(contact.FullName) ? "Votre Nom" : contact.FullName)
-                .FontSize(26).Bold().FontColor(Colors.White);
+                .FontSize(26).Bold().FontColor(QuestPDF.Helpers.Colors.White);
 
             if (!string.IsNullOrEmpty(contact.JobTitle))
             {
